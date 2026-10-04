@@ -1,7 +1,7 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
 
 // ANSI Color Codes for enhanced terminal output
@@ -147,6 +147,8 @@ class Process implements Runnable {
 }
 
 public class SchedulerSimulation {
+    // Count the number of context switches
+    private static int contextSwitchCount = 0;
     public static void main(String[] args) {
         // ⚠️ IMPORTANT: Put your student ID here to seed the random number generator
         // This makes your output unique to you - DO NOT forget to change this!
@@ -238,7 +240,8 @@ public class SchedulerSimulation {
             }
             System.out.println(Colors.BRIGHT_WHITE + "]" + Colors.RESET);
             System.out.println(Colors.BOLD + Colors.MAGENTA + "└" + "─".repeat(79) + Colors.RESET + "\n");
-            
+            // Increment the context switch counter
+            contextSwitchCount++;
             // Start the thread, which will run the process for one time quantum
             currentThread.start();
             
@@ -272,6 +275,7 @@ public class SchedulerSimulation {
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + 
                           "╔════════════════════════════════════════════════════════════════════════════════╗" + 
                           Colors.RESET);
+        System.out.println("Total context switches:" + contextSwitchCount);                  
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + "║" + Colors.RESET + 
                           Colors.BG_GREEN + Colors.WHITE + Colors.BOLD + 
                           "                     ✓  ALL PROCESSES COMPLETED  ✓                            " + 
@@ -294,9 +298,10 @@ public class SchedulerSimulation {
         processMap.put(thread, process);
         
         // Print a message indicating the process has entered the ready queue
-        System.out.println(Colors.BLUE + "  ➕ " + Colors.BOLD + Colors.CYAN + process.getName() + 
-                          Colors.RESET + Colors.BLUE + " added to ready queue" + Colors.RESET + 
-                          " │ Burst time: " + Colors.YELLOW + process.getBurstTime() + "ms" + 
-                          Colors.RESET + " | Priority: " + Colors.GREEN + process.getPriority() + Colors.RESET);
-    }
-}
+        System.out.println(Colors.BLUE + "  " + Colors.BOLD + Colors.CYAN + process.getName()
+        + Colors.RESET + Colors.BLUE + " added to ready queue"
+        + Colors.RESET + " - Burst time: " + process.getBurstTime() + "ms"
+        + " - Priority: " + process.getPriority());
+                                        }
+                                    }
+
