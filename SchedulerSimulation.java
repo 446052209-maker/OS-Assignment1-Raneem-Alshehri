@@ -168,7 +168,9 @@ public class SchedulerSimulation {
         
         // Map to associate each thread with its respective process object
         Map<Thread, Process> processMap = new HashMap<>();
-        
+        // Track process waiting time
+        Map<Process, Long> enqueueTimeMap = new HashMap<>();
+        Map<Process, Long> waitingTimeMap = new HashMap<>();
         // Print simulation header with elegant formatting
         System.out.println("\n" + Colors.BOLD + Colors.BRIGHT_CYAN + 
                           "╔═══════════════════════════════════════════════════════════════════════════════════════╗" + 
@@ -205,7 +207,7 @@ public class SchedulerSimulation {
             // Create a new process object with a unique name, burst time, and the defined time quantum
             Process process = new Process("P" + i, burstTime, timeQuantum, priority);
             // Add the process to the ready queue and the map
-            addProcessToQueue(process, processQueue, processMap);
+            addProcessToQueue(process, processQueue, processMap, enqueueTimeMap, waitingTimeMap);
         }
         
         // Start of the scheduler simulation
@@ -224,7 +226,12 @@ public class SchedulerSimulation {
         while (!processQueue.isEmpty()) {
             // Get the next thread from the queue (FIFO)
             Thread currentThread = processQueue.poll(); // Dequeues the next thread
-            
+            Process currentProcess = processMap.get(currentThread); 
+             // Calculate the waiting time for the process
+             long currentTime = System.currentTimeMillis();
+             long enqueueTime = enqueueTimeMap.get(currentProcess);
+             long waitingTime = currentTime - enqueueTime;
+             waitingTimeMap.put(currentProcess, waitingTimeMap.get(currentProcess) + waitingTime);
             // Print the current process queue (list of process IDs in the queue)
             System.out.println(Colors.BOLD + Colors.MAGENTA + "┌─ Ready Queue " + "─".repeat(65) + Colors.RESET);
             System.out.print(Colors.MAGENTA + "│ " + Colors.RESET + Colors.BRIGHT_WHITE + "[" + Colors.RESET);
@@ -254,13 +261,13 @@ public class SchedulerSimulation {
             
             // Retrieve the process associated with the thread from the map
             Process process = processMap.get(currentThread);
-            
+           
             // Check if the process is not finished
             if (!process.isFinished()) {
                 // If the process still has remaining time, check if there are more processes in queue
                 if (!processQueue.isEmpty()) {
                     // Re-enqueue the process to give it another chance to run in the next round
-                    addProcessToQueue(process, processQueue, processMap);
+                    addProcessToQueue(process, processQueue, processMap, enqueueTimeMap, waitingTimeMap);
                 } else {
                     // If this is the last process in the queue, run it to completion
                     System.out.println(Colors.BRIGHT_YELLOW + "  ⚠ " + Colors.CYAN + process.getName() + 
@@ -275,7 +282,15 @@ public class SchedulerSimulation {
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + 
                           "╔════════════════════════════════════════════════════════════════════════════════╗" + 
                           Colors.RESET);
-        System.out.println("Total context switches:" + contextSwitchCount);                  
+        System.out.println("Total context switches:" + contextSwitchCount);
+        // Print the final waiting time table
+        System.out.println("\nProcess Name\tBurst Time\tWaiting Time\tTurnaround Time");
+        for(Process process : waitingTimeMap.keySet()) {
+            long waitingTime = waitingTimeMap.get(process);
+            long turnaroundTime = waitingTime + process.getBurstTime();
+            System.out.println(process.getName() + "\t\t" + process.getBurstTime() + "ms\t\t" + 
+                               waitingTime + "ms\t\t" + turnaroundTime + "ms");
+        }
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + "║" + Colors.RESET + 
                           Colors.BG_GREEN + Colors.WHITE + Colors.BOLD + 
                           "                     ✓  ALL PROCESSES COMPLETED  ✓                            " + 
@@ -287,7 +302,9 @@ public class SchedulerSimulation {
     
     // Method to add a process to the queue and map, while printing a "ready" message
     public static void addProcessToQueue(Process process, Queue<Thread> processQueue, 
-                                        Map<Thread, Process> processMap) {
+                                        Map<Thread, Process> processMap,
+                                        Map<Process, Long> enqueueTimeMap,
+                                        Map<Process, Long> waitingTimeMap) {
         // Create a new thread to run the process
         Thread thread = new Thread(process);
         
@@ -297,6 +314,9 @@ public class SchedulerSimulation {
         // Map the thread to the process, so we can track the process associated with each thread
         processMap.put(thread, process);
         
+        // Record the time when the process enters the ready queue
+        enqueueTimeMap.put(process, System.currentTimeMillis());
+        waitingTimeMap.putIfAbsent(process, 0L); 
         // Print a message indicating the process has entered the ready queue
         System.out.println(Colors.BLUE + "  " + Colors.BOLD + Colors.CYAN + process.getName()
         + Colors.RESET + Colors.BLUE + " added to ready queue"
