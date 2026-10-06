@@ -129,68 +129,87 @@
 
 ## Your Development Log
 
-### Entry 1 - [Date and Time]
-**What I did**:
+### Entry 1 - [October 2, 2026, 8:52 PM]
+**What I did**: Set up the repository and changed my student ID
 
 **Details**:
+- Set up my assignment repository
+- Changed the student ID in 'SchedulerSimulation.java'
+- Saved the changes
 
-**Challenges**:
+**Challenges**: I had a problem editing the file directly on the GitHub website
 
-**Solution**:
+**Solution**: I moved to VS Code to make the change and save the file
 
-**Time spent**:
+**Time spent**: Approximately 45 minutes
 
 ---
 
-### Entry 2 - [Date and Time]
-**What I did**:
+### Entry 2 - [October 3, 2026, 1:26 AM]
+**What I did**: Added process priority to the scheduler simulation
 
 **Details**:
+- Added a random priority value from 1 to 10 for each process
+- Updated the process information to store and display its priority
+- Displayed the priority when a process enters the ready queue
+- Kept the ready queue order as FIFO
 
-**Challenges**:
+**Challenges**: I needed to make sure the priority was displayed without changing the FIFO queue order
 
-**Solution**:
+**Solution**: I used the priority only for display and kept the existing queue structure unchanged
 
-**Time spent**:
+**Time spent**: 60 minutes
 
 ---
 
-### Entry 3 - [Date and Time]
-**What I did**:
+### Entry 3 - [October 4, 2026, 8:35 PM]
+**What I did**: Added a context switch counter to the scheduler simulation
 
 **Details**:
+- Added a static counter to track context switches
+- Incremented the counter each time a new process starts running
+- Printed the total number of context switches at the end of the simulation
 
-**Challenges**:
+**Challenges**: I needed to make sure the counter increased at the correct point in the scheduling process
 
-**Solution**:
+**Solution**: I incremented the counter before starting the current thread
 
-**Time spent**:
+**Time spent**: 45 minutes
 
 ---
 
-### Entry 4 - [Date and Time]
-**What I did**:
+### Entry 4 - [October 5, 2026, 9:30 PM]
+**What I did**: Added waiting time tracking to the scheduler simulation
 
 **Details**:
+- Used System.currentTimeMillis() to record when a process enters the ready queue
+- Calculated the waiting time when the process starts running
+- Added a final table showing Process Name, Burst Time, Waiting Time, and Turnaround Time
+- Calculated Turnaround Time as Waiting Time + Burst Time
 
-**Challenges**:
+**Challenges**: I needed to make sure the waiting time was calculated correctly and was not always zero
 
-**Solution**:
+**Solution**: I stored the waiting time for each process and updated it when the process was taken from the ready queue
 
-**Time spent**:
+**Time spent**: 60 minutes
 
 ---
 
-### Entry 5 - [Date and Time]
-**What I did**:
+### Entry 5 - [October 6, 2026, 12:15 AM]
+**What I did**: Tested the scheduler simulation after completing the three required features
 
 **Details**:
+- Checked that the program compiled without errors
+- Ran the scheduler simulation and checked the process priorities
+- Checked the context switch counter
+- Checked the final waiting time and turnaround time table
+- Confirmed that the program completed successfully
 
-**Challenges**:
+**Challenges**: I needed to make sure the new features worked together without causing errors
 
-**Solution**:
+**Solution**: I compiled and ran the program and checked the output of each feature
 
-**Time spent**:
+**Time spent**: 20 minutes
 
 ---
 
