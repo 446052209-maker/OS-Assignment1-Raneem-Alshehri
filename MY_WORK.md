@@ -141,7 +141,7 @@
 
 **Solution**: I moved to VS Code to make the change and save the file
 
-**Time spent**: Approximately 45 minutes
+**Time spent**: 45 minutes
 
 ---
 
@@ -230,13 +230,13 @@
 
 > 💡 **TIP:** Fill this in **last**, after all entries are written.
 
-**Total time spent on assignment**: [X hours]
+**Total time spent on assignment**: [3 hours and 50 minutes]
 
-**Most challenging part**:
+**Most challenging part**: The most challenging part was adding waiting time tracking because I needed to calculate the waiting time correctly for each process
 
-**Most interesting learning**:
+**Most interesting learning**: The most interesting part was learning how the scheduler uses threads and how context switches happen when different processes run
 
-**What I would do differently next time**:
+**What I would do differently next time**: Next time I would plan the changes before editing the code and test each feature more systematically
 
 ---
 
@@ -256,7 +256,8 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[What I have learned about Multithreading is that it allows for various tasks to be able to be executed through Threads. Also by implementing “Runnable” we are able to build our own process which runs inside the Thread. 
+In addition by calling Thread.start(); We start our newly created process. Then when needed, we use Thread.sleep(); in order to make our simulation more realistic as this function simulates the amount of time our given process is being processed by the system. By doing this Assignment we were better able to grasp the way the Scheduler works allowing other processes CPU time.]
 
 ## Question 2: What was the most challenging part of this assignment?
 
@@ -264,7 +265,10 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[The most challenging part of this assignment was adding the waiting time calculation feature.
+I had to know when each process entered the ready queue.
+I used the  System.currentTimeMillis() to calculate the waiting time.
+At first the waiting times were not displaying correctly. After fixing the code, I saw the correct values ​​in the final table.]
 
 ## Question 3: How did you overcome the challenges you faced?
 
@@ -272,7 +276,7 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[At first I did the features in stages. Then I checked the existing code before making changes so make ensure there is no problem. When I found a problem, I checked the part of the code related to it and correct it. After that I compiled and ran the program to see my changes. So testing the output helped me find and fix the problems.]
 
 ## Question 4: How can you apply multithreading concepts in real-world applications?
 
@@ -280,7 +284,11 @@
 
 **Your Answer:** *(5-7 sentences)*
 
-[Write your answer here.]
+[Multithreading comes in handy when an application wants to perform multiple tasks.
+For instance, a web browser can be able to perform multiple tasks at once.
+An application for music can be able to play music as the user is using the application.
+Applications for games can perform multiple tasks using threads.
+This exercise taught me how threads can be able to share CPU time among tasks.]
 
 ### Optional: What would you like to learn more about?
 
