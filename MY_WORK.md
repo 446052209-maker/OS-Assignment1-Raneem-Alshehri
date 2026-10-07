@@ -320,7 +320,7 @@ This exercise taught me how threads can be able to share CPU time among tasks.]
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[Process is the Independent program with its own memory and they communicate with each other using Inter-Process Communication (IPC). While thread is small unit of a process sharing same memory and resources so, this enabling faster communication. In the code, we have a Process, which refers to the simulated process. Creation of actual thread in JAVA is carried out through "new Thread(process)". So, we used threads because they are easier and faster to create and manage than separate processes in this simulation.]
 
 ## Question 2: Ready Queue Behavior
 
@@ -332,15 +332,19 @@ This exercise taught me how threads can be able to share CPU time among tasks.]
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[If a process does not finish within its time quantum, it is added back to the ready queue. For example, P1 had a burst time of 8341ms, so after using 5000ms, it had 3341ms remaining and was added back to the ready queue once. Re-queuing is important because it allows other processes to get CPU time instead of one process using the CPU for too long.]
 
 Example from my output:
 ```
-[Paste a relevant snippet from your program output here showing a process being re-queued]
+[P1 executing quantum [5000ms]
+P1 completed quantum 5000ms
+Remaining time: 3341ms
+P1 yields CPU for context switch
+P1 added to ready queue - Burst time: 8341ms - Priority: 8]
 ```
 
 **Explanation of example:**
-[Explain what is happening in the output snippet you pasted.]
+[P1 didn't finish its work during the 5000ms time quantum, so it had 3341ms remaining. It then yielded the CPU and was added back to the ready queue once. This allows other processes to use the CPU before P1 runs again.]
 
 ## Question 3: Thread Lifecycle
 
@@ -350,15 +354,15 @@ Example from my output:
 
 **Your Answer:** *(3-5 sentences overall; one short explanation per state)*
 
-1. **New**: [When is P1 in the New state?]
+1. **New**: [P1 is in the New state when new Thread(process) creates the thread. The thread hasn't started yet. This is before Thread.start() is called.]
 
-2. **Runnable**: [When does P1 become Runnable?]
+2. **Runnable**: [P1 becomes Runnable when Thread.start() is called. The thread is now ready to run. It can start executing when the CPU gives it time.]
 
-3. **Running**: [When is P1 Running?]
+3. **Running**: [P1 is Running when its run() method is executing. At this time, P1 is using the CPU. For example, P1 runs for its time quantum.]
 
-4. **Waiting**: [When and why would a thread be Waiting?]
+4. **Waiting**: [The main thread waits when Thread.join() is called. It waits until P1 finishes running. P1 can also temporarily sleep when Thread.sleep() is called.]
 
-5. **Terminated**: [When is P1 Terminated?]
+5. **Terminated**: [P1 is Terminated when its run() method finishes. The thread has completed its work. So, it cannot run again.]
 
 ## Question 4: Real-World Applications
 
@@ -368,32 +372,32 @@ Example from my output:
 
 **Your Answer:** *(3-5 sentences per example)*
 
-### Example 1 (operating-system level): [Name of scenario]
+### Example 1 (operating-system level): [CPU Scheduling]
 
 **Description**:
-[Describe the real-world scenario.]
+[The operating system runs many processes at the same time. Each process gets a small amount of CPU time called a time quantum. When the time ends, the CPU switches to another process.]
 
 **Why Round-Robin works well here**:
-[Fairness, responsiveness, predictability?]
+[Round Robin it is considered fairness because each process gets equal CPU time. It also provides good response time for the system because one process cannot use the CPU for too long. Also the order is predictable because processes take turns.]
 
-### Example 2: [Name of application/scenario]
+### Example 2: [Web Browser/Multitasking]
 
 **Description**:
-[Describe the real-world scenario or application.]
+[The web browser can run many tasks at once. For instance, the browser can load a website at the same time as it plays a video. The CPU will switch between these tasks to keep them running.]
 
 **Why Round-Robin works well here**:
-[Fairness, responsiveness, predictability?]
+[Round Robin provides every task a chance to use the CPU. This ensures that the browser remains responsive while performing various tasks. Also the order is easy to predict because the tasks take turns.]
 
 ## Summary
 
 **Key concepts I understood through these questions:**
-1.
-2.
-3.
+1. I understood the difference between processes and threads.
+2. I understood how Round-Robin scheduling and the ready queue work.
+3. I understood the main stages of the thread lifecycle and context switching.
 
 **Concepts I need to study more:**
-1.
-2.
+1. I need to study the thread lifecycle more.
+2. I need to understand context switching in more detail.
 
 ---
 
